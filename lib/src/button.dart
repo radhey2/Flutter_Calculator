@@ -5,7 +5,7 @@ enum ButtonType { fn, num }
 class CalculatorButton extends StatelessWidget {
   final String label;
   final ButtonType type;
-  final void Function(String value) onPressed;
+  final void Function(String) onPressed;
 
   const CalculatorButton(
       {super.key,
@@ -15,28 +15,25 @@ class CalculatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 130,
-        padding: const EdgeInsets.only(top: 10, left: 5),
-        width: MediaQuery.of(context).size.width / 8,
-        // height: MediaQuery.of(context).size.height / 8,
-        child: Column(children: [
-          SizedBox(
-            height: 50,
-            child: Row(
-              children: [
-                FloatingActionButton(
-                  backgroundColor:
-                      type == ButtonType.fn ? Colors.amber : Colors.black,
-                  onPressed: (() {}),
-                  child: Text(label),
-                ),
-              ],
-            ),
+    return Container(
+      height: 80,
+      width: 80,
+      padding: const EdgeInsets.only(top: 10, left: 5),
+      child: Column(children: [
+        SizedBox(
+          height: 50,
+          child: Row(
+            children: [
+              FloatingActionButton(
+                backgroundColor:
+                    type == ButtonType.fn ? Colors.amber : Colors.black,
+                onPressed: () => onPressed(label),
+                child: Text(label),
+              ),
+            ],
           ),
-        ]),
-      ),
+        ),
+      ]),
     );
   }
 }
